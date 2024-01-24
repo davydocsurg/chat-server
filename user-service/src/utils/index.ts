@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 class ApiError extends Error {
     statusCode: number;
     isOperational: boolean;
@@ -19,4 +20,14 @@ class ApiError extends Error {
     }
 }
 
-export { ApiError };
+const encryptPassword = async (password: string) => {
+    const encryptedPassword = await bcrypt.hash(password, 12);
+    return encryptedPassword;
+};
+
+const isPasswordMatch = async (password: string, userPassword: string) => {
+    const result = await bcrypt.compare(password, userPassword);
+    return result;
+};
+
+export { ApiError, encryptPassword, isPasswordMatch };
