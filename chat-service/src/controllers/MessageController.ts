@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AuthRequest } from "../middleware";
-import Message from "../database/models/Message";
+import { Message } from "../database";
 
 const send = async (req: AuthRequest, res: Response) => {
     try {
@@ -18,7 +18,7 @@ const send = async (req: AuthRequest, res: Response) => {
             message: "Message sent successfully!",
             data: newMessage,
         });
-    } catch (error) {
+    } catch (error: any) {
         return res.json({
             status: 500,
             message: error.message,
@@ -43,7 +43,7 @@ const getConversation = async (req: AuthRequest, res: Response) => {
             message: "Messages retrieved successfully!",
             data: messages,
         });
-    } catch (error) {
+    } catch (error: any) {
         return res.json({
             status: 500,
             message: error.message,
@@ -64,7 +64,7 @@ const getConversations = async (req: AuthRequest, res: Response) => {
             message: "Messages retrieved successfully!",
             data: messages,
         });
-    } catch (error) {
+    } catch (error: any) {
         return res.json({
             status: 500,
             message: error.message,

@@ -4,7 +4,8 @@
   "description": "Chat Service - Chat Server",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "@types/jsonwebtoken": "^9.0.5"
   }
 }
