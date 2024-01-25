@@ -12,11 +12,5 @@ messageRoutes.get(
     authMiddleware,
     MessageController.getConversation
 );
-messageRoutes.get(
-    "/get/messages",
-    // @ts-ignore
-    authMiddleware,
-    MessageController.getConversations
-);
 
 export default messageRoutes;
