@@ -12,7 +12,7 @@ server = app.listen(config.PORT, () => {
 });
 const io = new SocketIOServer(server);
 io.on("connection", (socket: Socket) => {
-    console.log("User connected");
+    console.log("Client connected");
     socket.on("disconnect", () => {
         console.log("Client disconnected", socket.id);
     });
