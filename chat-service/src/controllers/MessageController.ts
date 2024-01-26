@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AuthRequest } from "../middleware";
 import { Message } from "../database";
-import { ApiError } from "../utils";
+import { ApiError, handleMessageReceived } from "../utils";
 
 const send = async (req: AuthRequest, res: Response) => {
     try {
@@ -15,6 +15,8 @@ const send = async (req: AuthRequest, res: Response) => {
             receiverId,
             message,
         });
+
+        await handleMessageReceived(senderId, receiverId, message);
 
         return res.json({
             status: 200,

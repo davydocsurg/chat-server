@@ -1,6 +1,6 @@
+import amqp from "amqplib";
 import config from "../config";
 import { UserStatusStore } from "./userStatusStore";
-import amqp from "amqplib";
 
 const userStatusStore = UserStatusStore.getInstance();
 

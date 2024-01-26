@@ -17,42 +17,44 @@ export class RabbitMQService {
     async connect() {
         const connection = await amqp.connect(config.msgBrokerURL!);
         const channel = await connection.createChannel();
-        await channel.assertQueue("notifications");
+        await channel.assertQueue(config.queue.notifications);
 
-        channel.consume("notifications", async (message) => {
-            if (message !== null) {
-                const payload: NotificationPayload = JSON.parse(
-                    message.content.toString()
-                );
+        return channel;
 
-                if (payload.type === "MESSAGE_RECEIVED") {
-                    const isUserOnline = await this.checkUserOnlineStatus(
-                        payload.userId
-                    );
+        // channel.consume("notifications", async (message) => {
+        //     if (message !== null) {
+        //         const payload: NotificationPayload = JSON.parse(
+        //             message.content.toString()
+        //         );
 
-                    if (isUserOnline) {
-                        await this.fcmService.sendPushNotification(
-                            payload.userToken,
-                            payload.message
-                        );
-                    } else {
-                        await this.emailService.sendEmail(
-                            payload.userEmail,
-                            "New Message",
-                            payload.message
-                        );
-                    }
-                }
+        //         if (payload.type === "MESSAGE_RECEIVED") {
+        //             const isUserOnline = await this.checkUserOnlineStatus(
+        //                 payload.userId
+        //             );
 
-                channel.ack(message); // Acknowledge the message after processing
-            }
-        });
+        //             if (isUserOnline) {
+        //                 await this.fcmService.sendPushNotification(
+        //                     payload.userToken,
+        //                     payload.message
+        //                 );
+        //             } else {
+        //                 await this.emailService.sendEmail(
+        //                     payload.userEmail,
+        //                     "New Message",
+        //                     payload.message
+        //                 );
+        //             }
+        //         }
+
+        //         channel.ack(message);
+        //     }
+        // });
     }
 
     private async checkUserOnlineStatus(userId: string): Promise<boolean> {
         // Logic to check if the user is currently online
         // This could involve querying a database or another service
         // For simplicity, let's assume a function that returns a boolean
-        return true; // Placeholder
+        return false; // Placeholder
     }
 }
