@@ -2,7 +2,7 @@ export class UserStatusStore {
     private static instance: UserStatusStore;
     private userStatuses: Record<string, boolean>;
 
-    private constructor() {
+    constructor() {
         this.userStatuses = {};
     }
 
