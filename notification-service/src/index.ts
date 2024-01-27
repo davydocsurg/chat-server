@@ -1,8 +1,6 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import userRouter from "./routes";
 import { errorConverter, errorHandler } from "./middlewares";
-import { connectDB } from "./database";
 import config from "./config";
 import { rabbitMQService } from "./services/RabbitMQService";
 
@@ -10,11 +8,8 @@ const app: Express = express();
 let server: Server;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api/", userRouter);
 app.use(errorConverter);
 app.use(errorHandler);
-
-connectDB();
 
 server = app.listen(config.PORT, () => {
     console.log(`Server is running on port ${config.PORT}`);

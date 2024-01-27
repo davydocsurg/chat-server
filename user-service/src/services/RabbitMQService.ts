@@ -1,6 +1,7 @@
 import amqp, { Channel, Connection } from "amqplib";
 import config from "../config";
 import { User } from "../database";
+import { ApiError } from "../utils";
 
 class RabbitMQService {
     private requestQueue = "USER_DETAILS_REQUEST";
@@ -46,10 +47,11 @@ class RabbitMQService {
 }
 
 const getUserDetails = async (userId: string) => {
-    const userDetails = User.findById({ userId }).select("-password");
-    console.log("====================================");
-    console.log(userDetails);
-    console.log("====================================");
+    const userDetails = await User.findById(userId).select("-password");
+    if (!userDetails) {
+        throw new ApiError(404, "User not found");
+    }
+
     return userDetails;
 };
 export const rabbitMQService = new RabbitMQService();

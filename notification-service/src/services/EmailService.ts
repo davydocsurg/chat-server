@@ -1,10 +1,13 @@
-import sibApiV3Sdk from "sib-api-v3-typescript";
+import * as sibApiV3Sdk from "sib-api-v3-typescript";
 import config from "../config";
 
 const apiInstance = new sibApiV3Sdk.TransactionalEmailsApi();
 
-let apiKey = apiInstance.authentications["apiKey"];
-apiKey.apiKey = config.SENDINBLUE_APIKEY!;
+apiInstance.setApiKey(
+    sibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+    config.SENDINBLUE_APIKEY!
+);
+// apiKey.apiKey = config.SENDINBLUE_APIKEY!;
 
 export class EmailService {
     async sendEmail(to: string, subject: string, content: string) {

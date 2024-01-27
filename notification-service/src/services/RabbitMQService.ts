@@ -5,7 +5,7 @@ import { EmailService } from "./EmailService";
 import { UserStatusStore } from "../utils";
 
 class RabbitMQService {
-    private channel: Channel;
+    private channel!: Channel;
     private fcmService = new FCMService();
     private emailService = new EmailService();
     private userStatusStore = new UserStatusStore();
@@ -17,6 +17,7 @@ class RabbitMQService {
     async init() {
         const connection = await amqp.connect(config.msgBrokerURL!);
         this.channel = await connection.createChannel();
+        await this.consumeNotification();
     }
 
     async consumeNotification() {
@@ -25,6 +26,8 @@ class RabbitMQService {
             if (msg) {
                 const { type, userId, message, userEmail, userToken } =
                     JSON.parse(msg.content.toString());
+
+                console.log(type, userId, userEmail);
 
                 if (type === "MESSAGE_RECEIVED") {
                     // Check if the user is online
@@ -38,6 +41,9 @@ class RabbitMQService {
                             message
                         );
                     } else if (userEmail) {
+                        console.log("====================================");
+                        console.log(userEmail);
+                        console.log("====================================");
                         // User is offline, send an email
                         await this.emailService.sendEmail(
                             userEmail,
