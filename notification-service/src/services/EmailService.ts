@@ -1,28 +1,34 @@
-import * as sibApiV3Sdk from "sib-api-v3-typescript";
+import nodemailer from "nodemailer";
 import config from "../config";
 
-const apiInstance = new sibApiV3Sdk.TransactionalEmailsApi();
-
-apiInstance.setApiKey(
-    sibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-    config.SENDINBLUE_APIKEY!
-);
-// apiKey.apiKey = config.SENDINBLUE_APIKEY!;
-
 export class EmailService {
-    async sendEmail(to: string, subject: string, content: string) {
-        let apiInstance = new sibApiV3Sdk.TransactionalEmailsApi();
-        let sendSmtpEmail = new sibApiV3Sdk.SendSmtpEmail();
+    private transporter;
 
-        sendSmtpEmail.to = [{ email: to }];
-        sendSmtpEmail.subject = subject;
-        sendSmtpEmail.htmlContent = content;
+    constructor() {
+        this.transporter = nodemailer.createTransport({
+            host: config.smtp.host,
+            port: config.smtp.port,
+            secure: false,
+            auth: {
+                user: config.smtp.user,
+                pass: config.smtp.pass,
+            },
+        });
+    }
+
+    async sendEmail(to: string, subject: string, content: string) {
+        const mailOptions = {
+            from: config.EMAIL_FROM,
+            to: to,
+            subject: subject,
+            html: content,
+        };
 
         try {
-            await apiInstance.sendTransacEmail(sendSmtpEmail);
-            console.log("Email sent successfully");
+            const info = await this.transporter.sendMail(mailOptions);
+            console.log("Email sent: %s", info.messageId);
         } catch (error) {
-            console.error(error);
+            console.error("Error sending email:", error);
         }
     }
 }
