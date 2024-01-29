@@ -4,8 +4,10 @@
     "description": "User Service - Chat Server",
     "main": "src/index.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon src/index.ts"
+        "dev": "NODE_ENV=development nodemon src/index.ts",
+        "build": "rm -rf build/ && tsc -p .",
+        "start": "NODE_ENV=production nodemon build/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",

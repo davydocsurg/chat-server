@@ -9,8 +9,6 @@ export const handleMessageReceived = async (
     receiverId: string,
     messageContent: string
 ) => {
-    console.log(senderName);
-
     const receiverIsOffline = !userStatusStore.isUserOnline(receiverId);
 
     if (receiverIsOffline) {
