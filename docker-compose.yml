@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  user:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=production
+
+  chat:
+    build:
+      context: ./chat-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - NODE_ENV=production
+
+  notification:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - NODE_ENV=production
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - user
+      - chat
+      - notification

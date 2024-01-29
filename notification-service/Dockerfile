@@ -10,6 +10,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 8081
+EXPOSE 8083
 
 CMD [ "npm", "start"]
