@@ -50,8 +50,8 @@ const register = async (req: Request, res: Response) => {
 };
 
 const createSendToken = async (user: IUser, res: Response) => {
-    const { email, id } = user;
-    const token = jwt.sign({ email, id }, jwtSecret, {
+    const { name, email, id } = user;
+    const token = jwt.sign({ name, email, id }, jwtSecret, {
         expiresIn: "1d",
     });
     if (config.env === "production") cookieOptions.secure = true;

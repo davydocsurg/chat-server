@@ -10,7 +10,7 @@ export class NotificationController {
 
     async handleNotifications() {
         const channel = await this.rabbitMQService.connect();
-        channel.consume(config.queue.notifications, async (msg) => {
+        channel.consume(config.queue.notifications, async (msg: any) => {
             if (msg) {
                 const { type, userId, message, userEmail, userToken } =
                     JSON.parse(msg.content.toString());

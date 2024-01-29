@@ -6,7 +6,7 @@ import { ApiError, handleMessageReceived } from "../utils";
 const send = async (req: AuthRequest, res: Response) => {
     try {
         const { receiverId, message } = req.body;
-        const { _id, email } = req.user;
+        const { _id, email, name } = req.user;
 
         validateReceiver(_id, receiverId);
 
@@ -16,7 +16,7 @@ const send = async (req: AuthRequest, res: Response) => {
             message,
         });
 
-        await handleMessageReceived(email, receiverId, message);
+        await handleMessageReceived(name, email, receiverId, message);
 
         return res.json({
             status: 200,

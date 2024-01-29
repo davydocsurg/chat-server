@@ -7,9 +7,11 @@ app.use(express.urlencoded({ extended: true }));
 
 const auth = proxy("http://localhost:8081");
 const messages = proxy("http://localhost:8082");
+const notifications = proxy("http://localhost:8083");
 
-app.use("/auth", auth);
-app.use("/messages", messages);
+app.use("/api/auth", auth);
+app.use("/api/messages", messages);
+app.use("/api/notifications", notifications);
 
 const server = app.listen(8080, () => {
     console.log("Gateway is Listening to Port 8080");

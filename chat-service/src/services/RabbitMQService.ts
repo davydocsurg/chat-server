@@ -24,7 +24,6 @@ class RabbitMQService {
                 if (msg) {
                     const correlationId = msg.properties.correlationId;
                     const user = JSON.parse(msg.content.toString());
-                    console.log(user);
 
                     const callback = this.correlationMap.get(correlationId);
                     if (callback) {
@@ -50,18 +49,17 @@ class RabbitMQService {
     async notifyReceiver(
         receiverId: string,
         messageContent: string,
-        senderEmail: string
+        senderEmail: string,
+        senderName: string
     ) {
         await this.requestUserDetails(receiverId, async (user: any) => {
-            // Handle the user details response here
-            // You can access the user details using the 'user' parameter
-            // For example, you can send a notification to the receiver using the user details
             const notificationPayload = {
                 type: "MESSAGE_RECEIVED",
                 userId: receiverId,
                 userEmail: user.email,
                 message: messageContent,
                 from: senderEmail,
+                fromName: senderName,
             };
 
             try {

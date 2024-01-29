@@ -7,7 +7,7 @@ const messageRoutes = Router();
 // @ts-ignore
 messageRoutes.post("/send", authMiddleware, MessageController.send);
 messageRoutes.get(
-    "/get/message/:receiverId",
+    "/get/:receiverId",
     // @ts-ignore
     authMiddleware,
     MessageController.getConversation

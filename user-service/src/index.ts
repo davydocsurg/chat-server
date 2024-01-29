@@ -10,7 +10,7 @@ const app: Express = express();
 let server: Server;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api/", userRouter);
+app.use(userRouter);
 app.use(errorConverter);
 app.use(errorHandler);
 

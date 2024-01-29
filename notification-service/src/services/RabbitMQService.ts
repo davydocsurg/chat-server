@@ -24,10 +24,14 @@ class RabbitMQService {
         await this.channel.assertQueue(config.queue.notifications);
         this.channel.consume(config.queue.notifications, async (msg) => {
             if (msg) {
-                const { type, userId, message, userEmail, userToken } =
-                    JSON.parse(msg.content.toString());
-
-                console.log(type, userId, userEmail);
+                const {
+                    type,
+                    userId,
+                    message,
+                    userEmail,
+                    userToken,
+                    fromName,
+                } = JSON.parse(msg.content.toString());
 
                 if (type === "MESSAGE_RECEIVED") {
                     // Check if the user is online
@@ -41,13 +45,10 @@ class RabbitMQService {
                             message
                         );
                     } else if (userEmail) {
-                        console.log("====================================");
-                        console.log(userEmail);
-                        console.log("====================================");
                         // User is offline, send an email
                         await this.emailService.sendEmail(
                             userEmail,
-                            "New Message",
+                            `New Message from ${fromName}`,
                             message
                         );
                     }
