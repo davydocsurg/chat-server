@@ -1,5 +1,5 @@
 import amqp, { Channel, Connection } from "amqplib";
-import config from "../config";
+import config from "../config/config";
 import { User } from "../database";
 import { ApiError } from "../utils";
 

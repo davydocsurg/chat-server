@@ -3,7 +3,7 @@ import { Server } from "http";
 import userRouter from "./routes";
 import { errorConverter, errorHandler } from "./middlewares";
 import { connectDB } from "./database";
-import config from "./config";
+import config from "./config/config";
 import { rabbitMQService } from "./services/RabbitMQService";
 
 const app: Express = express();

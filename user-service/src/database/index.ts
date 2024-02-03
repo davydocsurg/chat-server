@@ -1,4 +1,4 @@
-import User from "./models/User";
+import User, { IUser } from "./models/UserModel";
 import { connectDB } from "./connection";
 
-export { User, connectDB };
+export { User, IUser, connectDB };
