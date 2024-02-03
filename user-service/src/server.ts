@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import userRouter from "./routes";
+import userRouter from "./routes/authRoutes";
 import { errorConverter, errorHandler } from "./middlewares";
 import { connectDB } from "./database";
 import config from "./config/config";
