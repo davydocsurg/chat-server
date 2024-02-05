@@ -17,14 +17,6 @@ export const errorConverter: ErrorRequestHandler = (err, req, res, next) => {
     next(error);
 };
 
-// export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-//     const { statusCode, message } = err;
-//     res.status(statusCode).json({
-//         status: statusCode,
-//         message,
-//     });
-// };
-
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     let { statusCode, message } = err;
     if (process.env.NODE_ENV === "production" && !err.isOperational) {

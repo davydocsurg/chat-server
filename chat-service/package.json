@@ -2,11 +2,11 @@
     "name": "chat-server",
     "version": "1.0.0",
     "description": "Chat Service - Chat Server",
-    "main": "src/index.ts",
+    "main": "src/server.ts",
     "scripts": {
-        "dev": "NODE_ENV=development nodemon src/index.ts",
+        "dev": "NODE_ENV=development nodemon src/server.ts",
         "build": "rm -rf build/ && tsc -p .",
-        "start": "NODE_ENV=production nodemon build/index.js",
+        "start": "NODE_ENV=production nodemon build/server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

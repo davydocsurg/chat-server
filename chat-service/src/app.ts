@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import userRouter from "./routes";
+import userRouter from "./routes/messageRoutes";
 import { errorConverter, errorHandler } from "./middleware";
 
 const app: Express = express();

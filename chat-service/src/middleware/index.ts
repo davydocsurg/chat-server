@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../utils";
-import config from "../config";
+import config from "../config/config";
 
 interface TokenPayload {
     id: string;

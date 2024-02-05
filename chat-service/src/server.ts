@@ -2,7 +2,7 @@ import { Server } from "http";
 import { Socket, Server as SocketIOServer } from "socket.io";
 import app from "./app";
 import { Message, connectDB } from "./database";
-import config from "./config";
+import config from "./config/config";
 
 let server: Server;
 connectDB();

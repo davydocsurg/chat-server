@@ -1,6 +1,6 @@
 import amqp, { Channel } from "amqplib";
 import { v4 as uuidv4 } from "uuid";
-import config from "../config";
+import config from "../config/config";
 
 class RabbitMQService {
     private requestQueue = "USER_DETAILS_REQUEST";
