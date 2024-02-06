@@ -1,5 +1,5 @@
 import amqp, { Channel } from "amqplib";
-import config from "../config";
+import config from "../config/config";
 import { FCMService } from "./FCMService";
 import { EmailService } from "./EmailService";
 import { UserStatusStore } from "../utils";

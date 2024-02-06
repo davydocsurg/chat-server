@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import { errorConverter, errorHandler } from "./middlewares";
-import config from "./config";
+import { errorConverter, errorHandler } from "./middleware";
+import config from "./config/config";
 import { rabbitMQService } from "./services/RabbitMQService";
 
 const app: Express = express();
